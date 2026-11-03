@@ -106,7 +106,7 @@ The estimated probability distributions are used by the arithmetic coder to enco
 
 ## 4. Model Configuration
 
-The current `Paper_Code.ipynb` implementation uses the following configuration.
+The current `HybridDNACompCode.ipynb` implementation uses the following configuration.
 
 | Parameter | Value |
 |---|---:|
@@ -158,12 +158,12 @@ The paper discusses the following species datasets:
 
 The current notebook's `main()` function uses:
 
-- **Training and validation:** EsCo, AgPh, BuEb, and YeMi.
+- **Training and validation:** EsCo, AgPh, BuEb, and YeMi. ** For Example **
 - **Test input:** WaMe.
 
 The notebook uses a 90:10 training-validation split for each training species.
 
-**Important:** The notebook's current dataset configuration is not identical to the full dataset configuration discussed in the paper. To reproduce the paper's complete experimental setup, the dataset split and species selection must be aligned with the paper.
+**Important:** The notebook's current dataset configuration is not identical to the full dataset configuration discussed in the paper. To reproduce the paper's complete experimental setup, the dataset split and species selection must be aligned with the paper. Several combination of train dataset we will generate to test each dataset .
 
 ### Dataset Preparation
 
@@ -185,22 +185,9 @@ HybridDNAComp/
 │
 ├── README.md
 │
-├── Paper_Code.ipynb
+├── HybridDNACompCode.ipynb
 │
-├── requirements.txt
-│
-├── data/
-│   └── README.md
-│
-├── outputs/
-│   └── README.md
-│
-├── paper/
-│   └── research_paper.pdf
-│
-├── LICENSE
-│
-└── .gitignore
+├── HybridDNACompGraph.ipynb
 ```
 
 Only include files and folders that actually exist in your repository. The structure above is a suggested organization, not a claim that every component is already implemented.
@@ -226,9 +213,6 @@ Install the dependencies using:
 pip install torch numpy biopython torchac ninja
 ```
 
-For a reproducible research environment, use a `requirements.txt` file with the exact package versions tested in your environment.
-
----
 
 ## 8. Installation and Setup
 
@@ -247,21 +231,15 @@ cd HybridDNAComp
 ### Step 3: Install Dependencies
 
 ```bash
-pip install -r requirements.txt
-```
-
-If you have not created a `requirements.txt` file yet, you can install the main dependencies directly:
-
-```bash
 pip install torch numpy biopython torchac ninja
 ```
 
 ### Step 4: Open the Notebook
 
-Open `Paper_Code.ipynb` using Jupyter Notebook, JupyterLab, or Google Colab.
+Open `HybridDNACompCode.ipynb` using Jupyter Notebook, JupyterLab, or Google Colab.
 
 ```bash
-jupyter notebook Paper_Code.ipynb
+jupyter notebook HybridDNACompCode.ipynb
 ```
 
 ### Step 5: Prepare the Dataset
@@ -276,7 +254,7 @@ The current implementation is provided as a Jupyter Notebook.
 
 To execute the project:
 
-1. Open `Paper_Code.ipynb`.
+1. Open `HybridDNACompCode.ipynb`.
 2. Install all required dependencies.
 3. Prepare the genomic FASTA files.
 4. Update the dataset paths if necessary.
@@ -328,4 +306,201 @@ decompressed.fasta
 
 In the current notebook, the compression function returns the encoded data and CDF information separately. The seed context and CDF information are also required by the decompression function.
 
-Therefore, the generated `compressed.dnaac` file alone is not currently a self-contained,
+Therefore, the generated `compressed.dnaac` file alone is not currently a self-contained, independently decompressible archive.
+
+A portable compression format requires the necessary metadata, seed context, model/checkpoint information, and a reliable way to reproduce or store the coding probability information.
+
+This functionality should be completed and tested before distributing the compressed file as a standalone archive.
+
+---
+
+## 11. Evaluation Metrics
+
+The proposed framework is evaluated using the following metrics.
+
+### 11.1 Bits Per Base (BPB)
+
+Bits per base measures the average number of compressed bits required to represent one nucleotide.
+
+\[
+BPB = \frac{\text{Compressed Size (bits)}}{\text{Number of Bases}}
+\]
+
+A lower BPB indicates better compression efficiency.
+
+### 11.2 Compression Ratio (CR)
+
+Compression ratio measures the relationship between the original data size and the compressed data size.
+
+\[
+CR = \frac{\text{Original Size}}{\text{Compressed Size}}
+\]
+
+A higher compression ratio indicates better compression.
+
+### 11.3 Reconstruction Accuracy
+
+Reconstruction accuracy measures the percentage of nucleotide positions correctly recovered after decompression.
+
+\[
+Accuracy =
+\frac{\text{Number of Correctly Reconstructed Bases}}
+{\text{Total Number of Bases}}
+\times 100
+\]
+
+For lossless compression, the reconstructed sequence must match the original sequence exactly.
+
+### 11.4 Compression Time
+
+Compression time measures the time required to encode the input genomic sequence.
+
+### 11.5 Decompression Time
+
+Decompression time measures the time required to reconstruct the original genomic sequence from the compressed representation.
+
+---
+
+## 12. Experimental Results Reported in the Paper
+
+The research paper reports an average compression ratio of approximately **4.26**, with a reported maximum compression ratio of **4.52** on the DrMe dataset.
+
+The paper also reports exact reconstruction of the tested sequences.
+
+### Comparison with Other Compression Methods
+
+| Compression Method | Reported Compression Ratio |
+|---|---:|
+| GZIP | 3.54 |
+| Zstandard | 4.11 |
+| CoGI | 3.64 |
+| NAF | 4.21 |
+| HybridDNAComp | 4.26 |
+
+### Dataset-wise Results Reported in the Paper
+
+| Dataset | Compression Ratio |
+|---|---:|
+| BuEb | 4.14 |
+| AgPh | 4.10 |
+| YeMi | 4.32 |
+| AeCa | 4.00 |
+| HePy | 4.10 |
+| HaHi | 4.00 |
+| EsCo | 4.00 |
+| PlFa | 4.21 |
+| ScPo | 4.04 |
+| EnIn | 4.05 |
+| DrMe | 4.52 |
+| OrSa | 4.10 |
+| DaRe | 4.45 |
+| GaGa | 4.21 |
+| HoSa | 4.30 |
+
+**Note:** These are results reported in the research paper, not independently verified results from every execution of the currently uploaded notebook. The notebook's configuration and dataset setup differ from the experimental configuration described in the paper.
+
+---
+
+## 13. Hardware and Experimental Environment
+
+The research paper reports experiments conducted using an NVIDIA A100-SXM4-80GB GPU.
+
+The notebook uses PyTorch and attempts to use GPU acceleration and optimized attention operations when supported by the installed environment.
+
+Actual execution time and memory requirements depend on:
+
+- GPU model and available memory
+- PyTorch and CUDA versions
+- Dataset size
+- Sequence length
+- Batch size
+- Model configuration
+
+---
+
+## 14. Limitations
+
+The current implementation has the following limitations:
+
+1. **Nucleotide alphabet:** The preprocessing implementation supports only A, C, G, and T. Other ambiguous nucleotide symbols are removed.
+2. **Computational cost:** Transformer-based sequence modeling can require substantial computational resources.
+3. **Compression speed:** Neural probability estimation introduces computational overhead.
+4. **Archive portability:** The current compressed output does not independently contain all information required for decompression.
+5. **Experimental reproducibility:** The current notebook configuration and dataset split need to be aligned with the paper's reported experimental setup for complete reproducibility.
+6. **Hardware dependency:** Training and compression performance may vary across GPU and CPU environments.
+
+---
+
+## 15. Future Work
+
+Potential future improvements include:
+
+- Supporting ambiguous nucleotide symbols.
+- Improving compression and decompression speed.
+- Developing a self-contained compressed file format.
+- Improving adaptive probability modeling.
+- Evaluating the framework on additional genomic datasets.
+- Conducting more extensive comparisons with established genomic compression methods.
+- Optimizing memory usage for large genomic sequences.
+- Improving reproducibility through modular code and fixed experimental configurations.
+
+---
+
+## 16. Research Paper
+
+**Paper Title:** HybridDNAComp: A Transformer-Based Framework for Lossless Reference-Free DNA Sequence Compression
+
+The research paper describes the proposed architecture, experimental methodology, and reported performance.
+
+Add the paper PDF to the repository if you have permission to distribute it.
+
+---
+
+## 17. Citation
+
+If you use this work in your research, please cite the associated paper.
+
+A citation template is provided below. Replace the placeholder information with the final publication details after publication.
+
+```bibtex
+@article{hybriddnacomp,
+  title={HybridDNAComp: A Transformer-Based Framework for Lossless Reference-Free DNA Sequence Compression},
+  author={Your Name},
+  journal={Journal Name},
+  year={Year},
+  volume={Volume},
+  number={Issue},
+  pages={Page Range},
+  doi={DOI}
+}
+```
+
+---
+
+## 18. License
+
+A license has not yet been specified.
+
+Before making the repository public, choose an appropriate open-source license and add its full license text in a file named `LICENSE`.
+
+---
+
+## 19. Acknowledgement
+
+The project uses genomic sequence data from DNACorpus for research and experimental evaluation.
+
+The author acknowledges the developers and maintainers of the datasets, deep learning libraries, and compression tools used in this work.
+
+---
+
+## 20. Contact
+
+For questions, research collaboration, or technical discussions, please contact:
+
+**Author:** DEBARJEETA BISWAS  
+**GitHub:** https://github.com/debarjeetabiswas13-hub 
+**Email:** debarjeetabiswas13@gmail.com
+
+---
+
+**HybridDNAComp — Exploring Transformer-Based Lossless Compression for Genomic Sequences.**
