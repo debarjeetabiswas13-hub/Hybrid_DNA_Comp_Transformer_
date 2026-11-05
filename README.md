@@ -448,25 +448,7 @@ Potential future improvements include:
 
 ---
 
-## 16. Research Paper
-
-**Paper Title:** HybridDNAComp: A Transformer-Based Framework for Lossless Reference-Free DNA Sequence Compression
-
-The research paper describes the proposed architecture, experimental methodology, and reported performance.
-
-Add the paper PDF to the repository if you have permission to distribute it.
-
----
-
-## 17. License
-
-A license has not yet been specified.
-
-Before making the repository public, choose an appropriate open-source license and add its full license text in a file named `LICENSE`.
-
----
-
-## 18. Contact
+## 16. Contact
 
 For questions, research collaboration, or technical discussions, please contact:
 
