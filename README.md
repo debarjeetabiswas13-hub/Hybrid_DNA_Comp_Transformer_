@@ -328,7 +328,7 @@ The proposed framework is evaluated using the following metrics.
 Bits per base measures the average number of compressed bits required to represent one nucleotide.
 
 \[
-BPB = \frac{\text{Compressed Size (bits)}}{\text{Number of Bases}}
+BPB = Compressed Size (bits)/Number of Bases
 \]
 
 A lower BPB indicates better compression efficiency.
