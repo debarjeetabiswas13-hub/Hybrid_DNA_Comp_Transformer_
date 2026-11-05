@@ -134,7 +134,7 @@ The current `HybridDNACompCode.ipynb` implementation uses the following configur
 
 ## 5. Dataset
 
-The project uses genomic sequences from the **DNACorpus** dataset for model training and evaluation.
+The project uses genomic sequences from the [**DNACorpus**] (https://gigadb.org/dataset/100808) dataset for model training and evaluation.
 
 The paper discusses the following species datasets:
 
@@ -314,6 +314,10 @@ This functionality should be completed and tested before distributing the compre
 
 ---
 
+### Benchmark Execution Instructions
+
+(https://github.com/AnshuOishik/NGC/)
+(https://github.com/AnshuOishik/STC/)
 ## 11. Evaluation Metrics
 
 The proposed framework is evaluated using the following metrics.
