@@ -338,7 +338,7 @@ A lower BPB indicates better compression efficiency.
 Compression ratio measures the relationship between the original data size and the compressed data size.
 
 \[
-CR = \frac{\text{Original Size}}{\text{Compressed Size}}
+CR = Original Size/Compressed Size
 \]
 
 A higher compression ratio indicates better compression.
@@ -461,28 +461,7 @@ Add the paper PDF to the repository if you have permission to distribute it.
 
 ---
 
-## 17. Citation
-
-If you use this work in your research, please cite the associated paper.
-
-A citation template is provided below. Replace the placeholder information with the final publication details after publication.
-
-```bibtex
-@article{hybriddnacomp,
-  title={HybridDNAComp: A Transformer-Based Framework for Lossless Reference-Free DNA Sequence Compression},
-  author={Your Name},
-  journal={Journal Name},
-  year={Year},
-  volume={Volume},
-  number={Issue},
-  pages={Page Range},
-  doi={DOI}
-}
-```
-
----
-
-## 18. License
+## 17. License
 
 A license has not yet been specified.
 
@@ -490,15 +469,7 @@ Before making the repository public, choose an appropriate open-source license a
 
 ---
 
-## 19. Acknowledgement
-
-The project uses genomic sequence data from DNACorpus for research and experimental evaluation.
-
-The author acknowledges the developers and maintainers of the datasets, deep learning libraries, and compression tools used in this work.
-
----
-
-## 20. Contact
+## 18. Contact
 
 For questions, research collaboration, or technical discussions, please contact:
 
