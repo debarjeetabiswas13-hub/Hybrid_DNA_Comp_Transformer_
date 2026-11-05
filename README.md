@@ -314,10 +314,11 @@ This functionality should be completed and tested before distributing the compre
 
 ---
 
-### Benchmark Execution Instructions
+### Benchmark Code Execution Instructions
+https://github.com/AnshuOishik/NGC/
+and 
+https://github.com/AnshuOishik/STC/
 
-(https://github.com/AnshuOishik/NGC/)
-(https://github.com/AnshuOishik/STC/)
 ## 11. Evaluation Metrics
 
 The proposed framework is evaluated using the following metrics.
