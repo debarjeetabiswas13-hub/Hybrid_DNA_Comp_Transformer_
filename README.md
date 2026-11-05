@@ -348,10 +348,7 @@ A higher compression ratio indicates better compression.
 Reconstruction accuracy measures the percentage of nucleotide positions correctly recovered after decompression.
 
 \[
-Accuracy =
-\frac{\text{Number of Correctly Reconstructed Bases}}
-{\text{Total Number of Bases}}
-\times 100
+Accuracy = (Number of Correctly Reconstructed Bases/Total Number of Bases) * 100
 \]
 
 For lossless compression, the reconstructed sequence must match the original sequence exactly.
